@@ -16,38 +16,38 @@ export default function Logo() {
   // Load snap.svg
   // I could probably use framer-motion to animate the logo but I'm not sure if it's worth it
   // as I already have written the animation in snap.svg
-  useEffect(() => {
-    function loadSnapSvg(): Promise<HTMLScriptElement> {
-      return new Promise((resolve, reject) => {
-        const scriptEl = document.createElement('script');
-        scriptEl.src = '/js/snap.svg.js';
-        scriptEl.className = 'snap-svg';
-        scriptEl.async = true;
-        scriptEl.onload = () => {
-          try {
-            setLogoLoaded(true);
-            resolve(scriptEl);
-          } catch (e) {
-            reject(undefined);
-          }
-        };
+  // useEffect(() => {
+  //   function loadSnapSvg(): Promise<HTMLScriptElement> {
+  //     return new Promise((resolve, reject) => {
+  //       const scriptEl = document.createElement('script');
+  //       scriptEl.src = '/js/snap.svg.js';
+  //       scriptEl.className = 'snap-svg';
+  //       scriptEl.async = true;
+  //       scriptEl.onload = () => {
+  //         try {
+  //           setLogoLoaded(true);
+  //           resolve(scriptEl);
+  //         } catch (e) {
+  //           reject(undefined);
+  //         }
+  //       };
 
-        document.body.appendChild(scriptEl);
-      });
-    }
+  //       document.body.appendChild(scriptEl);
+  //     });
+  //   }
 
-    let scriptEl: HTMLScriptElement | undefined;
+  //   let scriptEl: HTMLScriptElement | undefined;
 
-    loadSnapSvg().then(async el => {
-      scriptEl = el;
+  //   loadSnapSvg().then(async el => {
+  //     scriptEl = el;
 
-      await animateLogo();
-    });
+  //     await animateLogo();
+  //   });
 
-    return () => {
-      scriptEl && document.body.removeChild(scriptEl);
-    };
-  }, []);
+  //   return () => {
+  //     scriptEl && document.body.removeChild(scriptEl);
+  //   };
+  // }, []);
 
   return (
     <motion.div

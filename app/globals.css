@@ -6,3 +6,23 @@ body {
   color: rgb(191, 199, 210);
   background: linear-gradient(to bottom, transparent, #10151d) #10151d;
 }
+
+:root {
+  --bg: #151e2b;
+  --border: #2e3c51;
+}
+
+@layer utilities {
+  .nav-bg-left,
+  .nav-bg-right {
+    @apply relative h-full w-[0%] bg-[--bg] border-b-[1px] border-[--border] overflow-hidden;
+  }
+
+  .nav-bg-left {
+    clip-path: polygon(0 0, 100% 0, calc(100% - 50px) 100%, 0 100%);
+  }
+
+  .nav-bg-right {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50px 100%);
+  }
+}
