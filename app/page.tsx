@@ -4,9 +4,9 @@ import Intro from './ui/Intro';
 export default function Home() {
   return (
     <main className=''>
-      <Intro/>
+      <Intro />
       {/* <Projects showSelected={true}/> */}
-      <Projects />
+      <Projects showSelected={false} />
     </main>
   );
 }

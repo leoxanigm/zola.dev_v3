@@ -7,7 +7,7 @@ const selectedProjects = ['tzmeet', 'evolved-robotic-hand', 'espace'];
 export default async function Projects({
   showSelected = false
 }: {
-  showSelected?: boolean;
+  showSelected: boolean;
 }) {
   let projectNames: string[];
 
