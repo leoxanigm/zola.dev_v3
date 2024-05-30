@@ -1,7 +1,10 @@
 export const animateLogo = () => {
   const s = Snap('#logo');
 
+  console.log('logo animation started!');
+
   if (!s) {
+    console.log('logo not found!');
     return;
   }
 
@@ -175,4 +178,6 @@ export const animateLogo = () => {
     },
     1300
   );
+
+  
 };

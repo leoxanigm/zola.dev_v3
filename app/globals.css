@@ -5,6 +5,7 @@
 body {
   color: rgb(191, 199, 210);
   background: linear-gradient(to bottom, transparent, #10151d) #10151d;
+  font-size: 16px;
 }
 
 :root {
@@ -12,17 +13,41 @@ body {
   --border: #2e3c51;
 }
 
+.container {
+  max-width: 860px !important;
+}
+
 @layer utilities {
   .nav-bg-left,
   .nav-bg-right {
     @apply relative h-full w-[0%] bg-[--bg] border-b-[1px] border-[--border] overflow-hidden;
+
+    & ul {
+      @apply flex flex-col sm:flex-row items-center justify-center sm:justify-end h-full pr-[2rem] sm:pr-[6rem] space-y-1 sm:space-y-0 sm:space-x-6;
+
+      &.nav-list-right {
+        @apply p-[unset] justify-start pl-[6rem] flex-row space-x-6 space-y-0;
+      }
+    }
+
+    &.no-animate {
+      @apply w-[100%];
+    }
   }
 
   .nav-bg-left {
-    clip-path: polygon(0 0, 100% 0, calc(100% - 50px) 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 70px) 100%, 0 100%);
+
+    @media screen and (min-width: 640px) {
+      clip-path: polygon(0 0, 100% 0, calc(100% - 50px) 100%, 0 100%);
+    }
   }
 
   .nav-bg-right {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50px 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 70px 100%);
+
+    @media screen and (min-width: 640px) {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50px 100%);
+    }
   }
 }
