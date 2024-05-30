@@ -48,9 +48,9 @@ export default function Intro() {
           viewport={{ once: true }}>
           <p>Hello, Bonjour, Guten Tag, Ciao</p>
 
-          <h1 className='text-xl font-bold inline-block'>I'm Zelalem (Zola)</h1>
+          <h1 className='text-xl font-bold inline-block'>I am Zelalem (Zola)</h1>
           <span>, thank you for taking time to visit my website.</span>
-          <p>I'm a problem solver who is skilled in these tools:</p>
+          <p>I am a problem solver who is skilled in these tools:</p>
         </motion.div>
 
         <ul className='list-none flex flex-wrap gap-2 my-4 max-w-[700px] text-[14px]'>

@@ -48,7 +48,7 @@ export default function Logo({ animate }: { animate: boolean }) {
     return () => {
       scriptEl && document.body.removeChild(scriptEl);
     };
-  }, []);
+  }, [animate]);
 
   return (
     <motion.div
