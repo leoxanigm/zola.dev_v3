@@ -6,7 +6,7 @@ export default function Home() {
     <main className=''>
       <Intro />
       {/* <Projects showSelected={true}/> */}
-      <Projects showSelected={false} />
+      <Projects />
     </main>
   );
 }
