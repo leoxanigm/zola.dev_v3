@@ -1,0 +1,19 @@
+export const metadata = {
+  id: "angry-birds",
+  title: "Angry Birds engine clone",
+  description: "A simple JavaScript clone of the Angry Birds collision game engine.",
+  projectURL: "https://6658be826690d55023cfb983--coruscating-belekoy-1164d6.netlify.app/",
+  heroImage: (await import('./angry_birds.jpg')).default,
+  heroVideo: "",
+  images: [],
+  techStack: ["JavaScript", "p5.js"],
+  date: "2021-10-14"
+}
+
+import Image from 'next/image';
+
+# Angry Birds engine clone
+
+A simple JavaScript clone of the Angry Birds collision game engine.
+
+<Image src={metadata.heroImage} alt={metadata.title} priority/>

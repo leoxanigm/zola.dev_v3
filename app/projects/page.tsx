@@ -1,23 +1,31 @@
-export default function Projects() {
-  return (
-    <section>
-      <h2 className='text-2xl font-bold mb-4'>Projects</h2>
+import { getProjectList } from '../lib/getProjectList';
 
-      <ProjectList />
-    </section>
+import ProjectList from '@/app/ui/ProjectList';
+
+const selectedProjects = ['tzmeet', 'evolved-robotic-hand', 'espace'];
+
+export default async function Projects({
+  showSelected = false
+}: {
+  showSelected?: boolean;
+}) {
+  let projectNames: string[];
+
+  if (showSelected) {
+    projectNames = selectedProjects;
+  } else {
+    projectNames = await getProjectList();
+  }
+
+  const projectsMetadata = await Promise.all(
+    projectNames.map(async projectName => {
+      const { metadata } = await import(
+        `@/app/projects/${projectName}/page.mdx`
+      );
+
+      return metadata;
+    })
   );
-}
 
-function ProjectList() {
-  return (
-    <div>
-      <Project />
-      <Project />
-      <Project />
-    </div>
-  );
-}
-
-function Project() {
-  return <div>Project</div>;
+  return <ProjectList projects={projectsMetadata} />;
 }

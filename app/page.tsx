@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <main className=''>
       <Intro/>
-      <hr className='my-8 border-[--border]'/>
-      <Projects/>
+      {/* <Projects showSelected={true}/> */}
+      <Projects />
     </main>
   );
 }

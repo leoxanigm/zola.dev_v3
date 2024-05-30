@@ -1,0 +1,19 @@
+export const metadata = {
+  id: "tzmeet",
+  title: "TZmeet.com",
+  description: "A web app to schedule meetings across time zones. Each attendee will pick their own preferred slot, and the app matches the best time.",
+  projectURL: "https://tzmeet.com",
+  heroImage: (await import('./tzmeet.png')).default,
+  heroVideo: "",
+  images: [],
+  techStack: ["JavaScript", "Node.js", "Express", "MySQL", "AWS", "Bootstrap"],
+  date: "2024-03-11"
+}
+
+import Image from 'next/image';
+
+# TZmeet.com
+
+A web app to schedule meetings across time zones. Each attendee will pick their own preferred time, and the app matches the best time.
+
+<Image src={metadata.heroImage} alt={metadata.title} priority/>

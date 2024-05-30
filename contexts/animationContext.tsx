@@ -49,3 +49,25 @@ export default function AnimationContextProvider({
     </AnimationContext.Provider>
   );
 }
+
+export function Delayed({
+  children,
+  delay = 0
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShow(true);
+    }, delay * 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [delay]);
+
+  return show ? <>{children}</> : null;
+}
