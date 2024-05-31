@@ -32,8 +32,12 @@ export default function ProjectList({
 
   useEffect(() => {
     window.addEventListener('resize', e => setWindowSize(window.innerWidth));
+    return () => window.removeEventListener('resize', e => setWindowSize(window.innerWidth));
   }, []);
-  
+
+  // Re-render when window size changes
+  useEffect(() => {}, [windowSize]);
+
   const sortedProjects = projects.sort((p1, p2) =>
     new Date(p1.date) > new Date(p2.date) ? -1 : 1
   );
@@ -47,8 +51,8 @@ export default function ProjectList({
 
   const projectDisplay = (projectList: ProjectMetadata[]) => (
     <div className='flex flex-col gap-4'>
-      {projectList.map((project, i) => (
-        <Project key={project.id} metadata={project} index={i} />
+      {projectList.map(project => (
+        <Project key={project.id} metadata={project} />
       ))}
     </div>
   );
@@ -56,7 +60,7 @@ export default function ProjectList({
   return (
     <Delayed delay={animate ? 2.25 : 0}>
       <section>
-        <h2 className='text-2xl font-bold mb-4'>Projects</h2>
+        <h2 className='text-2xl font-bold mb-8'>Projects</h2>
 
         <div className='flex flex-wrap gap-4 justify-center'>
           {/* Two columns on screens greater than 860px, one for mobile.
@@ -72,26 +76,37 @@ export default function ProjectList({
   );
 }
 
-function Project({
-  metadata,
-  index
-}: {
-  metadata: ProjectMetadata;
-  index: number;
-}) {
+function Project({ metadata }: { metadata: ProjectMetadata }) {
+  const fadeInAnimationVariants = {
+    initial: {
+      opacity: 0,
+      x: -50
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: 0.2
+      }
+    }
+  };
+
+  const hoverClasses =
+    'before:absolute before:inset-0 before:-translate-x-full hover:before:animate-[shimmer_0.5s] before:border-t before:border-gray-500/10 before:bg-gradient-to-r before:from-transparent before:via-gray-500/10 before:to-transparent';
+
   return (
     <motion.div
-      className='max-w-[398px] border border-[--border] bg-[--bg] group'
-      data-group={metadata.id}
-      initial={{ opacity: 0, x: Math.pow(-1, index) * 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.2 }}
+      className={
+        'relative overflow-hidden max-w-[398px] border border-[--border] bg-[--bg] group ' +
+        hoverClasses
+      }
+      variants={fadeInAnimationVariants}
+      initial='initial'
       whileInView='animate'
-      viewport={{ once: true }}>
-      <a
-        href={metadata.projectURL}
-        target='_blank'
-        className='block h-[145px] overflow-hidden group-hover:h-[290px] transition-all'>
+      viewport={{
+        once: true
+      }}>
+      <div className='block h-[145px] overflow-hidden group-hover:h-[290px] transition-all'>
         <Image
           src={metadata.heroImage}
           alt={metadata.title}
@@ -100,7 +115,7 @@ function Project({
           className='opacity-90 group-hover:opacity-100 transition-opacity'
         />
         {/* <HoverVideo youtubeVideoId={metadata.youtubeVideoId} /> */}
-      </a>
+      </div>
       <div className='p-5'>
         <a
           href={metadata.projectURL}
@@ -110,8 +125,7 @@ function Project({
             {metadata.title}
           </h3>
         </a>
-        <p className='text-sm text-gray-400'>{metadata.date}</p>
-        <p className='mb-3 font-normal'>{metadata.description}</p>
+        <p className='mb-3 font-normal leading-7'>{metadata.description}</p>
         <ul className='flex flex-wrap gap-1'>
           {metadata.techStack.map(tech => (
             <li

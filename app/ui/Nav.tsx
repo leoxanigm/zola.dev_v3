@@ -8,7 +8,10 @@ import Logo from '@/app/ui/Logo';
 import { useContext, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
-import { AnimationContext } from '@/contexts/animationContext';
+import {
+  AnimationContext,
+  SetAnimationContext
+} from '@/contexts/animationContext';
 
 const links = [
   {
@@ -25,6 +28,13 @@ export default function Nav() {
   const pathname = usePathname();
 
   const animate = useContext(AnimationContext);
+  const setAnimateNav = useContext(SetAnimationContext);
+
+  useEffect(() => {
+    // Set animateNav to false to prevent the nav from animating on page load
+    // This prevent a bug where there's a loading delay for the components in main
+    setTimeout(() => setAnimateNav(false), 2.25 * 1000);
+  }, []);
 
   return (
     <div className='flex'>

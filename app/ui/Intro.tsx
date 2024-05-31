@@ -68,7 +68,7 @@ export default function Intro() {
           ))}
         </ul>
 
-        <hr className='my-8 border-[--border]' />
+        <hr className='my-12 border-[--border]' />
       </section>
     </Delayed>
   );

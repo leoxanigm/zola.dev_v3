@@ -20,11 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={roboto_mono.className}>
+      <body className={`${roboto_mono.className} pb-14`}>
         <AnimationContextProvider>
           <Header />
 
-          <div className='container mx-auto px-4'>{children}</div>
+          <div className='container mx-auto px-4 overflow-x-hidden'>{children}</div>
         </AnimationContextProvider>
       </body>
     </html>

@@ -1,8 +1,11 @@
 'use client';
 
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 export const AnimationContext = createContext(true);
+export const SetAnimationContext = createContext<
+  React.Dispatch<React.SetStateAction<boolean>>
+>(() => {});
 
 const ANIMATE_AGAIN_AFTER = 30 * 60 * 1000; // 30 minutes
 
@@ -45,7 +48,9 @@ export default function AnimationContextProvider({
 
   return (
     <AnimationContext.Provider value={animateNav}>
-      {children}
+      <SetAnimationContext.Provider value={setAnimateNav}>
+        {children}
+      </SetAnimationContext.Provider>
     </AnimationContext.Provider>
   );
 }
@@ -58,8 +63,14 @@ export function Delayed({
   delay?: number;
 }) {
   const [show, setShow] = useState(false);
+  const animate = useContext(AnimationContext);
 
   useEffect(() => {
+    if (!animate) {
+      setShow(true);
+      return;
+    }
+
     const timer = setTimeout(() => {
       setShow(true);
     }, delay * 1000);
